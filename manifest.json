@@ -1,0 +1,20 @@
+{
+    "name": "My IT Shop - Dear Integration Plugin",
+    "version": "0.1",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": ["content.js"]
+        }
+    ],
+    "browser_action": {
+        "default_popup": "popup/popup.html",
+        "default_title": "MITS - DEAR INTEGRATION"
+    },
+    "icons": {
+        "128": "128.png"
+    }
+}

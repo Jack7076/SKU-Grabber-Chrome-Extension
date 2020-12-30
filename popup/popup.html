@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My IT Shop - Dear Integration Menu</title>
+    <link rel="stylesheet" href="popup.css" type="text/css">
+</head>
+<body>
+    <img class="banner_image" src="image/logo.png" alt="My IT Shop">
+    <h1 class="tool_title">Dear Integration</h1>
+    <p class="tool_status">Using Template: <span id="active_template">Un-identified</span></p>
+    
+    <div class="autodetect_wrapper">
+        <a href="#" id="autodetect_action">Find Product and Price</a>
+    </div>
+
+    <div class="data-fields">
+        <div class="form-item">
+            <label>Product Name:</label>
+            <input type="text" id="product_name">
+            <div class="product_error_name product_error">
+                <b>Error:</b>  You Must Enter A Product Name! 
+            </div>
+        </div>
+        <div class="form-item">
+            <label>Product SKU:</label>
+            <input type="text" id="product_sku">
+            <div class="product_error_sku product_error">
+                <b>Error:</b>  You Must Enter A Product SKU! 
+            </div>
+            <div class="product_error_sku_exists product_error">
+                <b>Error:</b>  The SKU you entered already exists. Please check if the product is already in the POS and if not please change the SKU here and create the product. (Ensure that you have reloaded product data first before continuing with creating the new product). 
+            </div>
+        </div>
+        <div class="form-item">
+            <label>Product Sell Price:</label>
+            <input type="text" id="product_sell_price">
+            <div class="product_error_sell product_error">
+                <b>Error:</b>  You Must Enter A Valid Product Sell Price! 
+            </div>
+            <div class="product_error_sell_format product_error">
+                <b>Error:</b>  The Sell Price you entered is not formatted correctly. <a href="#" class="format_sell_price">Click Here</a> to attempt to automatically format the price correctly.
+            </div>
+        </div>
+        <div class="form-item">
+            <label>Product Buy Price (inc. GST)</label>
+            <input type="text" id="product_buy_price_inc">
+            <div class="product_error_buy product_error">
+                <b>Error:</b>  You Must Enter A Valid Product Buy Price! 
+            </div>
+            <div class="product_error_buy_format product_error">
+                <b>Error:</b>  The Buy Price you entered is not formatted correctly. <a href="#" class="format_buy_price">Click Here</a> to attempt to automatically format the price correctly.
+            </div>
+        </div>
+    </div>
+
+    <div class="autodetect_wrapper" style="margin-top: 30px;">
+        <a href="#" id="push_product" disabled class="invalid_btn btn">Push Product To POS</a>
+    </div>
+
+    <input type="text" disabled id="active_web_host" style="display: none;">
+    <input type="text" disabled id="active_web_uri" style="display: none;">
+    <script src="../jquery.min.js"></script>
+    <script src="configuration.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

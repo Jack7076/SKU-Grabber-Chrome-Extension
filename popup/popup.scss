@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.autodetect_wrapper {
+    min-height: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+#autodetect_action {
+    padding: 15px;
+    background-color: #2ecc71;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: 0.2s;
+    margin: 15px auto;
+}
+
+#autodetect_action:hover {
+    text-decoration: underline;
+    transition: 0.2s;
+    padding: 18px;
+}
+
+.invalid_btn {
+    padding: 15px;
+    background-color: #e74c3c;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: 0.2s;
+    margin: 15px auto;
+    cursor: not-allowed;
+}
+
+.valid_btn {
+    padding: 15px;
+    background-color: #2ecc71;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: 0.2s;
+    margin: 15px auto;
+}
+.btn:hover {
+    text-decoration: underline;
+    transition: 0.2s;
+    padding: 18px;
+}
+
+.form-item {
+    width: 100%;
+    min-height: 30px;
+    label {
+        margin-left: 10px;
+        width: 100%;
+    }
+    input {
+        width: 92%;
+        margin: 10px;
+    }
+}
+
+.banner_image {
+    max-width: 300px;
+    padding: 15px;
+}
+
+.tool_title {
+    width: 100%;
+    text-align: center;
+}
+.tool_status {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.product_error {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    display: none;
+}
