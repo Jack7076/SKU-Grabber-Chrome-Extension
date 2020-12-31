@@ -1,40 +1,41 @@
 const Apify = require('apify');
-const cheerio = require('cheerio');
-const request = require("request-promise").defaults({ jar: true });
 
-Apify.main(async () => {    
+Apify.main(async () => {
     const input = await Apify.getInput();
     const {productID} = input;
-    console.log(`Got Product ID: ${productID}`);
-    const login_url = 'https://inventory.dearsystems.com/Account/Login';
 
-    const authentication = await request.post(login_url, {
-        form: {
-            UserName: process.env.account_username,
-            Password: process.env.account_password
-        },
-        simple: false
+    console.log(`Product ID form INPUT is: ${productID}`);
+
+    const browser = await Apify.launchPuppeteer();
+    const login_page = await browser.newPage();
+    await login_page.goto("https://inventory.dearsystems.com/Account/Login");
+
+    await login_page.type("#UserName", process.env.dear_username);
+    await login_page.type("#Password", process.env.dear_password);
+    await login_page.click("#btnSubmit");
+    await login_page.waitForNavigation();
+
+    const authentication_cookies  = await login_page.cookies();
+
+    console.log("Authenticated to Dear.");
+    await login_page.goto(`https://inventory.dearsystems.com/Home/Organisation?ID=${process.env.dear_organisation}`);
+    console.log("Selected Organisation on Dear.");
+    await login_page.goto(`https://inventory.dearsystems.com/Product#${productID}`);
+    console.log("Loading Product Page.");
+    await login_page.waitForSelector("#tabChannels", { timeout: 10000 });
+    console.log("Finished Loading Product Page.");
+    await login_page.click("#tabChannels");
+    console.log("Loading Channels Tab.");
+    await login_page.waitForSelector("#divChannelsTable", { timeout: 20000 });
+    console.log("Loaded Channels Tab.");
+    await login_page.evaluate(() => {
+        document.querySelector("span.mimic_a").click();
     });
+    console.log("Listing Product.");
 
-    console.log("Authenticated to Dear");
-
-    const product_list_url = 'https://inventory.dearsystems.com/DearPos/ListOrUpdateProduct';
-
-    const list_product = await request.post(product_list_url, {
-        form: {
-            ConfigID: process.env.pos_id,
-            ProductID: productID,
-            SyncStockLevel: true,
-            Lotalty: ""
-        },
-        simple: false
-    });
-
-    console.log("Listed Product");
-
+    await browser.close();
     const output = {
-        authentication,
-        list_product
+        "YAY": "YAY"
     };
     console.log('Actor output:');
     console.dir(output);
