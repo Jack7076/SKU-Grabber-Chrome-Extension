@@ -29,7 +29,18 @@ Apify.main(async () => {
     await login_page.waitForSelector("#divChannelsTable", { timeout: 20000 });
     console.log("Loaded Channels Tab.");
     await login_page.evaluate(() => {
-        document.querySelector("span.mimic_a").click();
+        $(".channelStoreName_channels").each(
+            (index) => {
+                 if(process.env.dear_channel == $(".channelStoreName_channels").eq(index).text()){
+                    var list_remove_btn_for_channel = $(".channelStoreName_channels").eq(index).parent().parent().parent().find(".mimic_a");
+                    if(list_remove_btn_for_channel.text() == "List"){
+                        list_remove_btn_for_channel.click();
+                    } else {
+                        console.log("Already Listed");
+                    }
+                 }
+            }
+        );
     });
     console.log("Listing Product.");
 
